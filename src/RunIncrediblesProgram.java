@@ -132,6 +132,8 @@ public class RunIncrediblesProgram implements Runnable {
         g.drawImage(ednaPic, edna.xpos, edna.ypos, edna.width, edna.height, null);
         g.drawImage(jackjackPic, jackJack.xpos, jackJack.ypos, jackJack.width, jackJack.height, null);
 
+        g.drawRect(edna.rec.x, edna.rec.y, edna.rec.width, edna.rec.height);
+
         g.dispose(); // done with image
         bufferStrategy.show(); // show everything that we've done
     }

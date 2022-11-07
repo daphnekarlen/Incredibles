@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class Incredibles { // comment
 
     //VARIABLE DECLARATION SECTION
@@ -10,6 +12,7 @@ public class Incredibles { // comment
     public int width;                 //the width of the hero image
     public int height;                //the height of the hero image
     public boolean isAlive;           //a boolean to denote if the hero is alive or dead
+    public Rectangle rec;
 
     public Incredibles(String pName, int pXpos, int pYpos){
         name = pName;
@@ -20,6 +23,7 @@ public class Incredibles { // comment
         width = 100;
         height = 100;
         isAlive = true;
+        rec = new Rectangle(xpos, ypos, width, height);
     }
 
     public void move() {
