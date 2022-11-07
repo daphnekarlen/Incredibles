@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Incredibles { // comment
+public class Incredibles {
 
     //VARIABLE DECLARATION SECTION
     //Here's where you state which variables you are going to use.
