@@ -24,6 +24,7 @@ public class Incredibles {
         height = 100;
         isAlive = true;
         rec = new Rectangle(xpos, ypos, width, height);
+
     }
 
     public void move() {
@@ -42,6 +43,8 @@ public class Incredibles {
         if(ypos>=700-width||ypos<=0){
             dy=-dy;
         }
+
+        rec=new Rectangle(xpos,ypos,width,height);
 
     }
 
@@ -62,6 +65,7 @@ public class Incredibles {
         if(ypos>=700 && dy>0){ // bottom wall
             ypos=-height;
         }
+        rec=new Rectangle(xpos,ypos,width,height);
 
 
     }

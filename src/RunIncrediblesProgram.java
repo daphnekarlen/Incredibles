@@ -30,11 +30,16 @@ public class RunIncrediblesProgram implements Runnable {
     public Image ednaPic;
     public Image jackjackPic;
 
+    public Image AJJPic;
+
 
     //Declare the objects used in the program
     //These are things that are made up of more than one variable type
     public Incredibles edna;
     public Incredibles jackJack;
+
+    public Incredibles AJJ;
+
 
 
     // Main method definition
@@ -59,6 +64,9 @@ public class RunIncrediblesProgram implements Runnable {
         jackjackPic = Toolkit.getDefaultToolkit().getImage("jackJack.png");
         jackJack = new Incredibles("jackJack", 800, 400);
 
+        AJJPic = Toolkit.getDefaultToolkit().getImage("AJJPic.webp");
+         AJJ = new Incredibles("AJJPic", 800, 400);
+
 
     } // end BasicGameApp constructor
 
@@ -75,6 +83,7 @@ public class RunIncrediblesProgram implements Runnable {
         //for the moment we will loop things forever.
         while (true) {
             moveThings();  //move all the game objects
+            crash();
             render();  // paint the graphics
             pause(20); // sleep for 10 ms
         }
@@ -84,7 +93,17 @@ public class RunIncrediblesProgram implements Runnable {
         //calls the move( ) code in the objects
         edna.wrap();
         jackJack.bounce();
+        render();
 
+    }
+
+    public void crash(){
+        if(edna.rec.intersects(jackJack.rec)){ // when they crash into each other
+            System.out.println("CRASH");
+            edna.isAlive = false;
+            // edna.dx=-edna.dx;
+            // jackJack.dx=-jackJack.dx;
+        }
     }
 
     //Pauses or sleeps the computer for the amount specified in milliseconds
@@ -129,10 +148,16 @@ public class RunIncrediblesProgram implements Runnable {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
         g.clearRect(0, 0, WIDTH, HEIGHT); // gets rid of old images in order to make a new one
 
+        if(edna.isAlive==true){
+            g.drawImage(AJJPic, AJJ.xpos, AJJ.ypos, AJJ.width, AJJ.height, null);
+        }
+
         g.drawImage(ednaPic, edna.xpos, edna.ypos, edna.width, edna.height, null);
+
         g.drawImage(jackjackPic, jackJack.xpos, jackJack.ypos, jackJack.width, jackJack.height, null);
 
         g.drawRect(edna.rec.x, edna.rec.y, edna.rec.width, edna.rec.height);
+        g.drawRect(jackJack.rec.x, jackJack.rec.y, jackJack.rec.width, jackJack.rec.height);
 
         g.dispose(); // done with image
         bufferStrategy.show(); // show everything that we've done
