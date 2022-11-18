@@ -29,16 +29,19 @@ public class RunIncrediblesProgram implements Runnable {
 
     public Image ednaPic;
     public Image jackjackPic;
+    public Image angryJackPic;
 
-    public Image AJJPic;
+    public Image mrIncrediblePic;
+    public Image backgroundPic;
 
 
     //Declare the objects used in the program
     //These are things that are made up of more than one variable type
     public Incredibles edna;
     public Incredibles jackJack;
+    public Incredibles angryJack;
 
-    public Incredibles AJJ;
+    public Incredibles mrIncredible;
 
 
 
@@ -58,14 +61,19 @@ public class RunIncrediblesProgram implements Runnable {
 
         //variable and objects
         //create (construct) the objects needed for the game and load up
-        ednaPic = Toolkit.getDefaultToolkit().getImage("edna.jpg"); //load the picture
+        ednaPic = Toolkit.getDefaultToolkit().getImage("edna.png"); //load the picture
         edna = new Incredibles("edna",10,100); //construct edna
 
         jackjackPic = Toolkit.getDefaultToolkit().getImage("jackJack.png");
         jackJack = new Incredibles("jackJack", 800, 400);
 
-        AJJPic = Toolkit.getDefaultToolkit().getImage("AJJPic.webp");
-         AJJ = new Incredibles("AJJPic", 800, 400);
+        angryJackPic = Toolkit.getDefaultToolkit().getImage("angryjackJack.png");
+         angryJack = new Incredibles("angryjackJack", 800, 400);
+
+         mrIncrediblePic = Toolkit.getDefaultToolkit().getImage("mrIncredible.png");
+         mrIncredible = new Incredibles ("mrIncredible", 100,400);
+
+         backgroundPic = Toolkit.getDefaultToolkit().getImage("ednaMansion.png");
 
 
     } // end BasicGameApp constructor
@@ -93,18 +101,28 @@ public class RunIncrediblesProgram implements Runnable {
         //calls the move( ) code in the objects
         edna.wrap();
         jackJack.bounce();
+        mrIncredible.bounce();
         render();
 
     }
 
     public void crash(){
-        if(edna.rec.intersects(jackJack.rec)){ // when they crash into each other
+       if(edna.rec.intersects(jackJack.rec)){ // when they crash into each other
             System.out.println("CRASH");
             edna.isAlive = false;
             // edna.dx=-edna.dx;
             // jackJack.dx=-jackJack.dx;
         }
+
+       if(jackJack.rec.intersects(mrIncredible.rec)){
+            System.out.println("CRASH");
+            jackJack.ypos = 500;
+        }
+
     }
+
+
+
 
     //Pauses or sleeps the computer for the amount specified in milliseconds
     public void pause(int time ) {
@@ -148,16 +166,21 @@ public class RunIncrediblesProgram implements Runnable {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
         g.clearRect(0, 0, WIDTH, HEIGHT); // gets rid of old images in order to make a new one
 
+        g.drawImage(backgroundPic, 0,0,WIDTH, HEIGHT, null);
+
         if(edna.isAlive==true){
-            g.drawImage(AJJPic, AJJ.xpos, AJJ.ypos, AJJ.width, AJJ.height, null);
+            g.drawImage(jackjackPic, jackJack.xpos, jackJack.ypos, jackJack.width, jackJack.height, null);
+        } else {
+            g.drawImage(angryJackPic, jackJack.xpos, jackJack.ypos, angryJack.width/2, angryJack.height, null);
         }
 
         g.drawImage(ednaPic, edna.xpos, edna.ypos, edna.width, edna.height, null);
 
-        g.drawImage(jackjackPic, jackJack.xpos, jackJack.ypos, jackJack.width, jackJack.height, null);
+        g.drawImage(mrIncrediblePic, mrIncredible.xpos, mrIncredible.ypos, mrIncredible.width, mrIncredible.height,null);
 
         g.drawRect(edna.rec.x, edna.rec.y, edna.rec.width, edna.rec.height);
         g.drawRect(jackJack.rec.x, jackJack.rec.y, jackJack.rec.width, jackJack.rec.height);
+        g.drawRect(mrIncredible.rec.x, mrIncredible.rec.y, mrIncredible.rec.width, mrIncredible.rec.height);
 
         g.dispose(); // done with image
         bufferStrategy.show(); // show everything that we've done

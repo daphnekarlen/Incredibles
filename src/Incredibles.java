@@ -17,7 +17,9 @@ public class Incredibles {
     public Incredibles(String pName, int pXpos, int pYpos){
         name = pName;
         xpos = pXpos;
+        xpos= (int)(Math.random()*400+100);
         ypos = pYpos;
+        ypos = (int)(Math.random()*150+50);
         dx = -5;
         dy = 5;
         width = 100;
@@ -30,6 +32,7 @@ public class Incredibles {
     public void move() {
         xpos = xpos + dx;
         ypos = ypos + dy;
+        rec=new Rectangle(xpos,ypos,width,height);
     }
 
     public void bounce(){
