@@ -20,16 +20,16 @@ public class Incredibles {
     public Rectangle topRec;
     public Rectangle bottomRec;
 
-    public Incredibles(String pName, int pXpos, int pYpos){
+    public Incredibles(String pName, int pXpos, int pYpos, int pDx, int pDy, int pW, int pH){
         name = pName;
         xpos = pXpos;
         //xpos= (int)(Math.random()*400+100);
         ypos = pYpos;
        // ypos = (int)(Math.random()*150+50);
-        dx = -5;
-        dy = 5;
-        width = 100;
-        height = 100;
+        dx = pDx;
+        dy = pDy;
+        width = pW;
+        height = pH;
         isAlive = true;
         rec = new Rectangle(xpos, ypos, width, height);
 
@@ -93,16 +93,16 @@ public class Incredibles {
 
     }
 
-    public void sizeMinus(){
-        width=width+dx;
-        height=height+dy;
-        rec=new Rectangle(xpos,ypos,width,height);
-        rec=new Rectangle(xpos,ypos,width,height);
-        leftRec = new Rectangle(xpos, ypos+10, 10, height-10);
-        rightRec = new Rectangle(xpos+width-10, ypos+10, 10, height-10);
-        topRec = new Rectangle(xpos+10, ypos, width-20, 10);
-        bottomRec = new Rectangle(xpos+10,ypos+height, width-20, 10 );
-    }
+//    public void sizeMinus (){
+////        width=width+dx;
+////        height=height+dy;
+//        rec=new Rectangle(xpos,ypos,width,height);
+//        rec=new Rectangle(xpos,ypos,width,height);
+//        leftRec = new Rectangle(xpos, ypos+10, 10, height-10);
+//        rightRec = new Rectangle(xpos+width-10, ypos+10, 10, height-10);
+//        topRec = new Rectangle(xpos+10, ypos, width-20, 10);
+//        bottomRec = new Rectangle(xpos+10,ypos+height, width-20, 10 );
+//    }
 
 
 }

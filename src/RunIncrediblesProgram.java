@@ -36,6 +36,8 @@ public class RunIncrediblesProgram implements Runnable {
 
     public Image elasticPic;
 
+    public Image frozonePic;
+
 
     //Declare the objects used in the program
     //These are things that are made up of more than one variable type
@@ -43,8 +45,9 @@ public class RunIncrediblesProgram implements Runnable {
     public Incredibles jackJack;
     public Incredibles angryJack;
     public Incredibles mrIncredible;
-
     public Incredibles elastigirl;
+
+    public Incredibles frozone;
 
 
 
@@ -68,23 +71,23 @@ public class RunIncrediblesProgram implements Runnable {
         //variable and objects
         //create (construct) the objects needed for the game and load up
         ednaPic = Toolkit.getDefaultToolkit().getImage("edna.png"); //load the picture
-        edna = new Incredibles("edna",350,200); //construct edna
-        edna.width=300;
-        edna.height=300;
-        edna.dx=0;
-        edna.dy=0;
+        edna = new Incredibles("edna",350,200, 0, 0, 300, 300); //construct edna
+
 
         jackjackPic = Toolkit.getDefaultToolkit().getImage("jackJack.png");
-        jackJack = new Incredibles("jackJack", 800, 100);
+        jackJack = new Incredibles("jackJack", 800, 100, 5, 5, 80, 100);
 
         angryJackPic = Toolkit.getDefaultToolkit().getImage("angryjackJack.png");
-        angryJack = new Incredibles("angryjackJack", 0, 400);
+        angryJack = new Incredibles("angryjackJack", 0, 400, 8, 8, 80, 100);
 
-        mrIncrediblePic = Toolkit.getDefaultToolkit().getImage("mrIncredible.png");
-        mrIncredible = new Incredibles ("mrIncredible", 50,200);
+        mrIncrediblePic = Toolkit.getDefaultToolkit().getImage("mrIncredibles2.png");
+        mrIncredible = new Incredibles ("mrIncredible", 50,200, 8, 8, 150, 200);
 
         elasticPic = Toolkit.getDefaultToolkit().getImage("elastic.png");
-        elastigirl = new Incredibles("elastic", 800, 100);
+        elastigirl = new Incredibles("elastic", 800, 100, 1, 1, 100, 200);
+
+        frozonePic = Toolkit.getDefaultToolkit().getImage("frozone.png");
+        frozone = new Incredibles("frozone", 100, 100, 2, 2, 150, 200);
 
         backgroundPic = Toolkit.getDefaultToolkit().getImage("ednaMansion.png");
 
@@ -116,6 +119,7 @@ public class RunIncrediblesProgram implements Runnable {
         jackJack.bounce();
        edna.wrap();
        elastigirl.wrap();
+       frozone.bounce();
 
 
     }
@@ -151,6 +155,7 @@ public class RunIncrediblesProgram implements Runnable {
             mrIncredible.dy = -mrIncredible.dy;
 
         }
+
 
 
     }
@@ -221,6 +226,9 @@ public class RunIncrediblesProgram implements Runnable {
 //        g.drawRect(edna.rec.x, edna.rec.y, edna.rec.width, edna.rec.height);
 //        g.drawRect(jackJack.rec.x, jackJack.rec.y, jackJack.rec.width, jackJack.rec.height);
 //        g.drawRect(mrIncredible.rec.x, mrIncredible.rec.y, mrIncredible.rec.width, mrIncredible.rec.height);
+//        g.drawRect(frozone.rec.x, frozone.rec.y, frozone.rec.width, frozone.rec.height);
+
+        g.drawImage(frozonePic, frozone.xpos, frozone.ypos, frozone.width, frozone.height, null);
 
         g.dispose(); // done with image
         bufferStrategy.show(); // show everything that we've done
