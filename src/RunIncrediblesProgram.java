@@ -34,14 +34,20 @@ public class RunIncrediblesProgram implements Runnable {
     public Image mrIncrediblePic;
     public Image backgroundPic;
 
+    public Image elasticPic;
+
 
     //Declare the objects used in the program
     //These are things that are made up of more than one variable type
     public Incredibles edna;
     public Incredibles jackJack;
     public Incredibles angryJack;
-
     public Incredibles mrIncredible;
+
+    public Incredibles elastigirl;
+
+
+
 
 
 
@@ -62,18 +68,25 @@ public class RunIncrediblesProgram implements Runnable {
         //variable and objects
         //create (construct) the objects needed for the game and load up
         ednaPic = Toolkit.getDefaultToolkit().getImage("edna.png"); //load the picture
-        edna = new Incredibles("edna",10,100); //construct edna
+        edna = new Incredibles("edna",350,200); //construct edna
+        edna.width=300;
+        edna.height=300;
+        edna.dx=0;
+        edna.dy=0;
 
         jackjackPic = Toolkit.getDefaultToolkit().getImage("jackJack.png");
-        jackJack = new Incredibles("jackJack", 800, 400);
+        jackJack = new Incredibles("jackJack", 800, 100);
 
         angryJackPic = Toolkit.getDefaultToolkit().getImage("angryjackJack.png");
-         angryJack = new Incredibles("angryjackJack", 800, 400);
+        angryJack = new Incredibles("angryjackJack", 0, 400);
 
-         mrIncrediblePic = Toolkit.getDefaultToolkit().getImage("mrIncredible.png");
-         mrIncredible = new Incredibles ("mrIncredible", 100,400);
+        mrIncrediblePic = Toolkit.getDefaultToolkit().getImage("mrIncredible.png");
+        mrIncredible = new Incredibles ("mrIncredible", 50,200);
 
-         backgroundPic = Toolkit.getDefaultToolkit().getImage("ednaMansion.png");
+        elasticPic = Toolkit.getDefaultToolkit().getImage("elastic.png");
+        elastigirl = new Incredibles("elastic", 800, 100);
+
+        backgroundPic = Toolkit.getDefaultToolkit().getImage("ednaMansion.png");
 
 
     } // end BasicGameApp constructor
@@ -99,25 +112,46 @@ public class RunIncrediblesProgram implements Runnable {
 
     public void moveThings() {
         //calls the move( ) code in the objects
-        edna.wrap();
-        jackJack.bounce();
         mrIncredible.bounce();
-        render();
+        jackJack.bounce();
+       edna.wrap();
+       elastigirl.wrap();
+
 
     }
 
     public void crash(){
-       if(edna.rec.intersects(jackJack.rec)){ // when they crash into each other
-            System.out.println("CRASH");
-            edna.isAlive = false;
-            // edna.dx=-edna.dx;
-            // jackJack.dx=-jackJack.dx;
+        if(edna.rec.intersects(jackJack.rec) && edna.isCrashing== false){ // when they crash into each other
+            System.out.println("CRASH");// if jackjack.isAlive is false, make it true // if it's true, make it false
+            edna.isCrashing = true;
+            if(jackJack.isAlive==false){
+                System.out.println("CRASH");
+                jackJack.isAlive=true;
+            } else{
+                jackJack.isAlive = false;} // edna.dx=-edna.dx; // jackJack.dx=-jackJack.dx;
+        }
+        if(!edna.rec.intersects(jackJack.rec)){
+            edna.isCrashing = false;
+        } // reset astro.isCrashing to false when no longer intersecting
+
+//
+
+        if(mrIncredible.rec.intersects(edna.leftRec)) {
+            mrIncredible.dx = -mrIncredible.dx;
+        }
+        if(mrIncredible.rec.intersects(edna.rightRec)) {
+            mrIncredible.dx = -mrIncredible.dx;
         }
 
-       if(jackJack.rec.intersects(mrIncredible.rec)){
-            System.out.println("CRASH");
-            jackJack.ypos = 500;
+        if(mrIncredible.rec.intersects(edna.bottomRec)) {
+            mrIncredible.dy = -mrIncredible.dy;
         }
+
+        if(mrIncredible.rec.intersects(edna.topRec)) {
+            mrIncredible.dy = -mrIncredible.dy;
+
+        }
+
 
     }
 
@@ -168,19 +202,25 @@ public class RunIncrediblesProgram implements Runnable {
 
         g.drawImage(backgroundPic, 0,0,WIDTH, HEIGHT, null);
 
-        if(edna.isAlive==true){
+        if(jackJack.isAlive==true){
             g.drawImage(jackjackPic, jackJack.xpos, jackJack.ypos, jackJack.width, jackJack.height, null);
         } else {
             g.drawImage(angryJackPic, jackJack.xpos, jackJack.ypos, angryJack.width/2, angryJack.height, null);
         }
 
         g.drawImage(ednaPic, edna.xpos, edna.ypos, edna.width, edna.height, null);
+//        g.drawRect(edna.leftRec.x, edna.leftRec.y, edna.leftRec.width, edna.leftRec.height);
+//        g.drawRect(edna.rightRec.x, edna.rightRec.y, edna.rightRec.width, edna.rightRec.height);
+//        g.drawRect(edna.topRec.x, edna.topRec.y, edna.topRec.width, edna.topRec.height);
+//        g.drawRect(edna.bottomRec.x, edna.bottomRec.y, edna.bottomRec.width, edna.bottomRec.height);
 
         g.drawImage(mrIncrediblePic, mrIncredible.xpos, mrIncredible.ypos, mrIncredible.width, mrIncredible.height,null);
 
-        g.drawRect(edna.rec.x, edna.rec.y, edna.rec.width, edna.rec.height);
-        g.drawRect(jackJack.rec.x, jackJack.rec.y, jackJack.rec.width, jackJack.rec.height);
-        g.drawRect(mrIncredible.rec.x, mrIncredible.rec.y, mrIncredible.rec.width, mrIncredible.rec.height);
+        g.drawImage(elasticPic, elastigirl.xpos, elastigirl.ypos, elastigirl.width, elastigirl.height,null);
+
+//        g.drawRect(edna.rec.x, edna.rec.y, edna.rec.width, edna.rec.height);
+//        g.drawRect(jackJack.rec.x, jackJack.rec.y, jackJack.rec.width, jackJack.rec.height);
+//        g.drawRect(mrIncredible.rec.x, mrIncredible.rec.y, mrIncredible.rec.width, mrIncredible.rec.height);
 
         g.dispose(); // done with image
         bufferStrategy.show(); // show everything that we've done
