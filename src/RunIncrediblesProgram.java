@@ -214,11 +214,11 @@ public class RunIncrediblesProgram implements Runnable {
         }
 
         g.drawImage(ednaPic, edna.xpos, edna.ypos, edna.width, edna.height, null);
-        g.drawRect(edna.rec.x, edna.rec.y, edna.rec.width, edna.rec.height);
-        g.drawRect(edna.leftRec.x, edna.leftRec.y, edna.leftRec.width, edna.leftRec.height);
-        g.drawRect(edna.rightRec.x, edna.rightRec.y, edna.rightRec.width, edna.rightRec.height);
-        g.drawRect(edna.topRec.x, edna.topRec.y, edna.topRec.width, edna.topRec.height);
-        g.drawRect(edna.bottomRec.x, edna.bottomRec.y, edna.bottomRec.width, edna.bottomRec.height);
+//        g.drawRect(edna.rec.x, edna.rec.y, edna.rec.width, edna.rec.height);
+//        g.drawRect(edna.leftRec.x, edna.leftRec.y, edna.leftRec.width, edna.leftRec.height);
+//        g.drawRect(edna.rightRec.x, edna.rightRec.y, edna.rightRec.width, edna.rightRec.height);
+//        g.drawRect(edna.topRec.x, edna.topRec.y, edna.topRec.width, edna.topRec.height);
+//        g.drawRect(edna.bottomRec.x, edna.bottomRec.y, edna.bottomRec.width, edna.bottomRec.height);
         // the commented section above shows the different rectangles I created for Edna so that Mr. Incredible could bounce off all of her four sides
 
         g.drawImage(mrIncrediblePic, mrIncredible.xpos, mrIncredible.ypos, mrIncredible.width, mrIncredible.height,null);
