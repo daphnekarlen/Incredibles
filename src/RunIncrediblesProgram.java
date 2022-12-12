@@ -36,8 +36,6 @@ public class RunIncrediblesProgram implements Runnable {
 
     public Image elasticPic;
 
-    public Image frozonePic;
-
 
     //Declare the objects used in the program
     //These are things that are made up of more than one variable type
@@ -47,7 +45,9 @@ public class RunIncrediblesProgram implements Runnable {
     public Incredibles mrIncredible;
     public Incredibles elastigirl;
 
-    public Incredibles frozone;
+    public SoundFile junkCrash2;
+    public SoundFile neighborhood; // these are the two sounds that I use
+
 
 
 
@@ -71,25 +71,26 @@ public class RunIncrediblesProgram implements Runnable {
         //variable and objects
         //create (construct) the objects needed for the game and load up
         ednaPic = Toolkit.getDefaultToolkit().getImage("edna.png"); //load the picture
-        edna = new Incredibles("edna",350,200, 0, 0, 300, 300); //construct edna
+        edna = new Incredibles("edna",400,200, 0, 0, 200, 300); //construct edna
 
 
         jackjackPic = Toolkit.getDefaultToolkit().getImage("jackJack.png");
-        jackJack = new Incredibles("jackJack", 800, 100, 5, 5, 80, 100);
+        jackJack = new Incredibles("jackJack", 800, 100, 5, 5, 130, 150);
 
         angryJackPic = Toolkit.getDefaultToolkit().getImage("angryjackJack.png");
-        angryJack = new Incredibles("angryjackJack", 0, 400, 8, 8, 80, 100);
+        angryJack = new Incredibles("angryjackJack", 0, 400, 8, 8, 130, 150);
 
         mrIncrediblePic = Toolkit.getDefaultToolkit().getImage("mrIncredibles2.png");
         mrIncredible = new Incredibles ("mrIncredible", 50,200, 8, 8, 150, 200);
 
         elasticPic = Toolkit.getDefaultToolkit().getImage("elastic.png");
-        elastigirl = new Incredibles("elastic", 800, 100, 1, 1, 100, 200);
-
-        frozonePic = Toolkit.getDefaultToolkit().getImage("frozone.png");
-        frozone = new Incredibles("frozone", 100, 100, 2, 2, 150, 200);
+        elastigirl = new Incredibles("elastic", 800, 100, 1, 1, 200, 220);
 
         backgroundPic = Toolkit.getDefaultToolkit().getImage("ednaMansion.png");
+
+        junkCrash2 = new SoundFile ("junkCrash2.wav");
+        neighborhood = new SoundFile ("neighborhood.wav");
+        neighborhood.play();
 
 
     } // end BasicGameApp constructor
@@ -119,27 +120,25 @@ public class RunIncrediblesProgram implements Runnable {
         jackJack.bounce();
        edna.wrap();
        elastigirl.wrap();
-       frozone.bounce();
-
-
-    }
+    } // these say what the characters are going to do once they reach the edge of the plane
 
     public void crash(){
         if(edna.rec.intersects(jackJack.rec) && edna.isCrashing== false){ // when they crash into each other
             System.out.println("CRASH");// if jackjack.isAlive is false, make it true // if it's true, make it false
             edna.isCrashing = true;
-            if(jackJack.isAlive==false){
+            if(jackJack.isAlive==true){
                 System.out.println("CRASH");
-                jackJack.isAlive=true;
+                jackJack.isAlive=false;
+                junkCrash2.play();
             } else{
-                jackJack.isAlive = false;} // edna.dx=-edna.dx; // jackJack.dx=-jackJack.dx;
+                jackJack.isAlive = true;
+            } // this causes jackJack's image to change when he and Edna collide and for a crash sound to play when jackjack turns angry
         }
         if(!edna.rec.intersects(jackJack.rec)){
             edna.isCrashing = false;
         } // reset astro.isCrashing to false when no longer intersecting
 
 //
-
         if(mrIncredible.rec.intersects(edna.leftRec)) {
             mrIncredible.dx = -mrIncredible.dx;
         }
@@ -153,8 +152,10 @@ public class RunIncrediblesProgram implements Runnable {
 
         if(mrIncredible.rec.intersects(edna.topRec)) {
             mrIncredible.dy = -mrIncredible.dy;
-
         }
+        // these if statements cause Mr. Incredible to bounce around Edna.
+
+
 
 
 
@@ -214,6 +215,7 @@ public class RunIncrediblesProgram implements Runnable {
         }
 
         g.drawImage(ednaPic, edna.xpos, edna.ypos, edna.width, edna.height, null);
+        //g.drawRect(edna.rec.x, edna.rec.y, edna.rec.width, edna.rec.height);
 //        g.drawRect(edna.leftRec.x, edna.leftRec.y, edna.leftRec.width, edna.leftRec.height);
 //        g.drawRect(edna.rightRec.x, edna.rightRec.y, edna.rightRec.width, edna.rightRec.height);
 //        g.drawRect(edna.topRec.x, edna.topRec.y, edna.topRec.width, edna.topRec.height);
@@ -223,12 +225,6 @@ public class RunIncrediblesProgram implements Runnable {
 
         g.drawImage(elasticPic, elastigirl.xpos, elastigirl.ypos, elastigirl.width, elastigirl.height,null);
 
-//        g.drawRect(edna.rec.x, edna.rec.y, edna.rec.width, edna.rec.height);
-//        g.drawRect(jackJack.rec.x, jackJack.rec.y, jackJack.rec.width, jackJack.rec.height);
-//        g.drawRect(mrIncredible.rec.x, mrIncredible.rec.y, mrIncredible.rec.width, mrIncredible.rec.height);
-//        g.drawRect(frozone.rec.x, frozone.rec.y, frozone.rec.width, frozone.rec.height);
-
-        g.drawImage(frozonePic, frozone.xpos, frozone.ypos, frozone.width, frozone.height, null);
 
         g.dispose(); // done with image
         bufferStrategy.show(); // show everything that we've done
