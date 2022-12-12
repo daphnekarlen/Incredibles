@@ -3,7 +3,6 @@ import java.awt.*;
 public class Incredibles {
 
     //VARIABLE DECLARATION SECTION
-    //Here's where you state which variables you are going to use.
     public String name;               //name of the hero
     public int xpos;                  //the x position
     public int ypos;                  //the y position
@@ -15,10 +14,12 @@ public class Incredibles {
 
     public boolean isCrashing = false;
     public Rectangle rec;
+   // these are the rectangles that all the characters use
     public Rectangle leftRec;
     public Rectangle rightRec;
     public Rectangle topRec;
     public Rectangle bottomRec;
+    // these are all of the Edna's rectangles
 
     public Incredibles(String pName, int pXpos, int pYpos, int pDx, int pDy, int pW, int pH){
         name = pName;
@@ -33,31 +34,20 @@ public class Incredibles {
         isAlive = true;
         rec = new Rectangle(xpos, ypos, width, height);
 
-
     }
 
-    public void move() {
-        xpos = xpos + dx;
-        ypos = ypos + dy;
-        rec=new Rectangle(xpos,ypos,width,height);
-        leftRec = new Rectangle(xpos, ypos+10, 10, height-10);
-        rightRec = new Rectangle(xpos+width-10, ypos+10, 10, height-10);
-        topRec = new Rectangle(xpos+10, ypos, width-20, 10);
-        bottomRec = new Rectangle(xpos+10,ypos+height, width-20, 10 );
-
-    }
 
     public void bounce(){
 
         xpos = xpos + dx;
         ypos = ypos + dy;
-        // if/when alien hits the right side, reverse dx direction
+        // if/when incredible hits the right side, reverse dx direction
         if(xpos>=1000-width||xpos<=0){
             dx = -dx;
         }
         if(ypos>=700-width||ypos<=0){
             dy=-dy;
-        }
+        } // if/when incredible hits side, reverse dy direction
 
         rec=new Rectangle(xpos,ypos,width,height);
         rec=new Rectangle(xpos,ypos,width,height);
@@ -83,7 +73,7 @@ public class Incredibles {
 
         if(ypos>=700 && dy>0){ // bottom wall
             ypos=-height;
-        }
+        } // these statements show how the Incredible will wrap the screen once it goes enough out of the screen
         rec=new Rectangle(xpos,ypos,width,height);
         rec=new Rectangle(xpos,ypos,width,height);
         leftRec = new Rectangle(xpos, ypos+10, 10, height-10);
@@ -92,17 +82,6 @@ public class Incredibles {
         bottomRec = new Rectangle(xpos+10,ypos+height, width-20, 10 );
 
     }
-
-//    public void sizeMinus (){
-////        width=width+dx;
-////        height=height+dy;
-//        rec=new Rectangle(xpos,ypos,width,height);
-//        rec=new Rectangle(xpos,ypos,width,height);
-//        leftRec = new Rectangle(xpos, ypos+10, 10, height-10);
-//        rightRec = new Rectangle(xpos+width-10, ypos+10, 10, height-10);
-//        topRec = new Rectangle(xpos+10, ypos, width-20, 10);
-//        bottomRec = new Rectangle(xpos+10,ypos+height, width-20, 10 );
-//    }
 
 
 }

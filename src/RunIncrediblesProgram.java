@@ -35,7 +35,7 @@ public class RunIncrediblesProgram implements Runnable {
     public Image backgroundPic;
 
     public Image elasticPic;
-
+// this section declares the names of my images
 
     //Declare the objects used in the program
     //These are things that are made up of more than one variable type
@@ -44,6 +44,7 @@ public class RunIncrediblesProgram implements Runnable {
     public Incredibles angryJack;
     public Incredibles mrIncredible;
     public Incredibles elastigirl;
+// these are all my characters that are part of the Incredibles
 
     public SoundFile junkCrash2;
     public SoundFile neighborhood; // these are the two sounds that I use
@@ -81,7 +82,7 @@ public class RunIncrediblesProgram implements Runnable {
         angryJack = new Incredibles("angryjackJack", 0, 400, 8, 8, 130, 150);
 
         mrIncrediblePic = Toolkit.getDefaultToolkit().getImage("mrIncredibles2.png");
-        mrIncredible = new Incredibles ("mrIncredible", 50,200, 8, 8, 150, 200);
+        mrIncredible = new Incredibles ("mrIncredible", 600,50, 8, 8, 130, 150);
 
         elasticPic = Toolkit.getDefaultToolkit().getImage("elastic.png");
         elastigirl = new Incredibles("elastic", 800, 100, 1, 1, 200, 220);
@@ -102,7 +103,6 @@ public class RunIncrediblesProgram implements Runnable {
 // put your code to do things here.
 
     // main thread
-    // this is the code that plays the game after you set things up
     public void run() {
 
         //for the moment we will loop things forever.
@@ -112,10 +112,9 @@ public class RunIncrediblesProgram implements Runnable {
             render();  // paint the graphics
             pause(20); // sleep for 10 ms
         }
-    }
+    } // this code plays the game
 
     public void moveThings() {
-        //calls the move( ) code in the objects
         mrIncredible.bounce();
         jackJack.bounce();
        edna.wrap();
@@ -215,11 +214,12 @@ public class RunIncrediblesProgram implements Runnable {
         }
 
         g.drawImage(ednaPic, edna.xpos, edna.ypos, edna.width, edna.height, null);
-        //g.drawRect(edna.rec.x, edna.rec.y, edna.rec.width, edna.rec.height);
-//        g.drawRect(edna.leftRec.x, edna.leftRec.y, edna.leftRec.width, edna.leftRec.height);
-//        g.drawRect(edna.rightRec.x, edna.rightRec.y, edna.rightRec.width, edna.rightRec.height);
-//        g.drawRect(edna.topRec.x, edna.topRec.y, edna.topRec.width, edna.topRec.height);
-//        g.drawRect(edna.bottomRec.x, edna.bottomRec.y, edna.bottomRec.width, edna.bottomRec.height);
+        g.drawRect(edna.rec.x, edna.rec.y, edna.rec.width, edna.rec.height);
+        g.drawRect(edna.leftRec.x, edna.leftRec.y, edna.leftRec.width, edna.leftRec.height);
+        g.drawRect(edna.rightRec.x, edna.rightRec.y, edna.rightRec.width, edna.rightRec.height);
+        g.drawRect(edna.topRec.x, edna.topRec.y, edna.topRec.width, edna.topRec.height);
+        g.drawRect(edna.bottomRec.x, edna.bottomRec.y, edna.bottomRec.width, edna.bottomRec.height);
+        // the commented section above shows the different rectangles I created for Edna so that Mr. Incredible could bounce off all of her four sides
 
         g.drawImage(mrIncrediblePic, mrIncredible.xpos, mrIncredible.ypos, mrIncredible.width, mrIncredible.height,null);
 
