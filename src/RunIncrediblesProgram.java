@@ -1,8 +1,11 @@
 //Basic Game Application
 //Graphics Libraries
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.*;
+import java.security.Key;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -10,7 +13,7 @@ import javax.swing.JPanel;
 //*******************************************************************************
 // Class Definition Section
 
-public class RunIncrediblesProgram implements Runnable {
+public class RunIncrediblesProgram implements Runnable, KeyListener {
 
     //Variable Definition Section
     //Declare the variables used in the program
@@ -69,6 +72,8 @@ public class RunIncrediblesProgram implements Runnable {
 
         setUpGraphics();
 
+        canvas.addKeyListener(this);
+
         //variable and objects
         //create (construct) the objects needed for the game and load up
         ednaPic = Toolkit.getDefaultToolkit().getImage("edna.png"); //load the picture
@@ -82,7 +87,7 @@ public class RunIncrediblesProgram implements Runnable {
         angryJack = new Incredibles("angryjackJack", 0, 400, 8, 8, 130, 150);
 
         mrIncrediblePic = Toolkit.getDefaultToolkit().getImage("mrIncredibles2.png");
-        mrIncredible = new Incredibles ("mrIncredible", 600,50, 8, 8, 130, 150);
+        mrIncredible = new Incredibles ("mrIncredible", 600,50, 4, 4, 130, 150);
 
         elasticPic = Toolkit.getDefaultToolkit().getImage("elastic.png");
         elastigirl = new Incredibles("elastic", 800, 100, 1, 1, 200, 220);
@@ -110,16 +115,70 @@ public class RunIncrediblesProgram implements Runnable {
             moveThings();  //move all the game objects
             crash();
             render();  // paint the graphics
-            pause(20); // sleep for 10 ms
+            pause(20); // sleep for 10 ms=
         }
     } // this code plays the game
 
     public void moveThings() {
-        mrIncredible.bounce();
+        mrIncredible.moveWithKeys();
         jackJack.bounce();
        edna.wrap();
        elastigirl.wrap();
+
     } // these say what the characters are going to do once they reach the edge of the plane
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    public void keyPressed(KeyEvent event) {
+        //This method will do something whenever any key is pressed down.
+        //Put if( ) statements here
+        char key = event.getKeyChar();     //gets the character of the key pressed
+        int keyCode = event.getKeyCode();  //gets the keyCode (an integer) of the key pressed
+        System.out.println("Key Pressed: " + key + "  Code: " + keyCode);
+
+        if (keyCode == 68) { //d
+            mrIncredible.right = true;
+        }
+        if (keyCode == 83) { //s
+            mrIncredible.down = true;
+        }
+        if(keyCode==75){
+            mrIncredible.up = true;
+        }
+        if(keyCode==76){
+            mrIncredible.left = true;
+        }
+
+    }//keyPressed()
+
+    public void keyReleased(KeyEvent event) {
+        char key = event.getKeyChar();
+        int keyCode = event.getKeyCode();
+        //This method will do something when a key is released
+        if (keyCode == 68) {
+            mrIncredible.right = false;
+        }
+        if (keyCode == 83) {
+            mrIncredible.down = false;
+        }
+        if(keyCode==75){
+            mrIncredible.up = false;
+        }
+        if(keyCode==76){
+            mrIncredible.left = false;
+        }
+
+
+    }//keyReleased()
+
+
+
+
+
+
 
     public void crash(){
         if(edna.rec.intersects(jackJack.rec) && edna.isCrashing== false){ // when they crash into each other
@@ -154,10 +213,6 @@ public class RunIncrediblesProgram implements Runnable {
         }
         // these if statements cause Mr. Incredible to bounce around Edna.
 
-
-
-
-
     }
 
 
@@ -173,6 +228,7 @@ public class RunIncrediblesProgram implements Runnable {
 
     //Graphics setup method
     private void setUpGraphics() {
+
         frame = new JFrame("Application Template");   //Create the program window or frame.  Names it.
 
         panel = (JPanel) frame.getContentPane();  //sets up a JPanel which is what goes in the frame
